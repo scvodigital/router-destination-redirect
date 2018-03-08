@@ -1,6 +1,6 @@
 {
   "name": "@scvo/router-destination-redirect",
-  "version": "0.0.9",
+  "version": "0.0.1",
   "description": "SCVO=>Router destination for 301/303/307 redirections",
   "main": "dist/index.js",
   "scripts": {
