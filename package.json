@@ -8,6 +8,7 @@
     "cleanup": "rm -rf ./dist",
     "build": "npm run cleanup;tsc",
     "prepublishOnly": "npm run build",
+    "install": "npm run build",
     "local": "npm link @scvo/router; npm run build; npm link"
   },
   "repository": {
@@ -18,7 +19,7 @@
     "SCVO=>Router",
     "SCVO",
     "Router",
-    "Handlebars",
+    "Redirect",
     "Destination"
   ],
   "author": "Matthew Wilkes (SCVO)",
