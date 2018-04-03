@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -35,9 +45,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var RedirectRouterDestination = /** @class */ (function () {
+var router_1 = require("@scvo/router");
+var RedirectRouterDestination = /** @class */ (function (_super) {
+    __extends(RedirectRouterDestination, _super);
     function RedirectRouterDestination() {
-        this.name = "redirect";
+        var _this = _super.call(this) || this;
+        _this.name = 'redirect';
+        return _this;
     }
     RedirectRouterDestination.prototype.execute = function (routeMatch) {
         return __awaiter(this, void 0, void 0, function () {
@@ -48,9 +62,9 @@ var RedirectRouterDestination = /** @class */ (function () {
                     response = {
                         statusCode: config.statusCode,
                         body: '',
-                        headers: {
-                            Location: config.location
-                        }
+                        contentType: 'text/plain',
+                        headers: { Location: config.location },
+                        cookies: {}
                     };
                     return [2 /*return*/, response];
                 }
@@ -63,6 +77,6 @@ var RedirectRouterDestination = /** @class */ (function () {
         });
     };
     return RedirectRouterDestination;
-}());
+}(router_1.RouterDestination));
 exports.RedirectRouterDestination = RedirectRouterDestination;
 //# sourceMappingURL=index.js.map

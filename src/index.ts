@@ -1,32 +1,33 @@
-import { 
-    IContext, IRouterDestination, IRouteMatch, 
-    IRouterResponse, RouteDestinationError
-} from '@scvo/router';
+import {RouteDestinationError, RouteMatch, RouterConfiguration, RouterDestination, RouterResponse} from '@scvo/router';
 
-export class RedirectRouterDestination implements IRouterDestination {
-    name: string = "redirect";
+export class RedirectRouterDestination extends RouterDestination {
+  name = 'redirect';
 
-    constructor() { }
+  constructor() {
+    super();
+  }
 
-    public async execute(routeMatch: IRouteMatch): Promise<IRouterResponse> {
-        try {
-            var config: IRedirectConfig = routeMatch.route.destination.config;
-            var response: IRouterResponse = {
-                statusCode: config.statusCode,
-                body: '',
-                headers: {
-                    Location: config.location
-                }
-            };
-            return response;
-        } catch(err) {
-            console.error('#### REDIRECTROUTERDESTINATION.execute() -> Failed to redirect:', err);
-            throw err;
-        }
+  async execute(routeMatch: RouteMatch): Promise<RouterResponse> {
+    try {
+      const config: RedirectConfig = routeMatch.route.destination.config;
+      const response: RouterResponse = {
+        statusCode: config.statusCode,
+        body: '',
+        contentType: 'text/plain',
+        headers: {Location: config.location},
+        cookies: {}
+      };
+      return response;
+    } catch (err) {
+      console.error(
+          '#### REDIRECTROUTERDESTINATION.execute() -> Failed to redirect:',
+          err);
+      throw err;
     }
+  }
 }
 
-export interface IRedirectConfig {
-    statusCode: 301 | 303 | 307;
-    location: string;
+export interface RedirectConfig {
+  statusCode: 301|303|307;
+  location: string;
 }

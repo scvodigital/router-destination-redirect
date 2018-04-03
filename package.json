@@ -1,14 +1,22 @@
 {
   "name": "@scvo/router-destination-redirect",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "SCVO=>Router destination for 301/303/307 redirections",
-  "main": "dist/index.js",
+  "main": "./build/index",
+  "typings": "./build/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cleanup": "rm -rf ./dist",
     "build": "npm run cleanup;tsc",
     "prepublishOnly": "npm run build",
-    "local": "npm link @scvo/router; npm run build; npm link"
+    "local": "npm link @scvo/router && npm run compile && npm link",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check"
   },
   "repository": {
     "type": "git",
@@ -28,9 +36,11 @@
   },
   "homepage": "https://github.com/scvodigital/router-detination-redirect#readme",
   "dependencies": {
-    "@scvo/router": "1.1.5"
+    "@scvo/router": "1.1.7"
   },
   "devDependencies": {
-    "@types/node": "^9.4.6"
+    "@types/node": "^9.4.6",
+    "gts": "^0.5.4",
+    "typescript": "~2.6.1"
   }
 }
